@@ -6,50 +6,43 @@ sol(S) :-
     apr-ReactorApr-PrincipleApr-CountryApr
   ],
 
-  Solution = [
-    reactor(jan, ReactorJan, PrincipleJan, CountryJan),
-    reactor(feb, ReactorFeb, PrincipleFeb, CountryFeb),
-    reactor(mar, ReactorMar, PrincipleMar, CountryMar),
-    reactor(apr, ReactorApr, PrincipleApr, CountryApr)
-  ],
-
   permutation([dynotis, comati, adtina, tamura], [ReactorJan, ReactorFeb, ReactorMar, ReactorApr]),
   permutation([tp, fusor, dd, poly], [PrincipleJan, PrincipleFeb, PrincipleMar, PrincipleApr]),
   permutation([qatar, ecuador, zambia, france], [CountryJan, CountryFeb, CountryMar, CountryApr]),
 
 % условие 1
-  (member(reactor(mar, _, Principle1, Country1), Solution),
+  (member(mar-_-Principle1-Country1, S),
   (Country1 = france; Principle1 = dd)),
 
 % условие 2
-  (member(reactor(Month2, comati, _, _), Solution),
+  (member(Month2-comati-_-_, S),
   Month2 \= jan),
 
 % условие 3
-  (member(reactor(Month31, _, tp, Country31), Solution),
+  (member(Month31-_-tp-Country31, S),
   Month31 \= mar, Country31 \= zambia,
-  member(reactor(mar, _, Principle32, Country32), Solution),
+  member(mar-_-Principle32-Country32, S),
   Principle32 \= tp, Country32 \= zambia),
 
 % условие 4
-  (member(reactor(jan, _, Principle4, Country4), Solution),
+  (member(jan-_-Principle4-Country4, S),
   (Country4 = qatar; Principle4 = tp)),
 
 % условие 5
-  ((member(reactor(Month51, Reactor51, tp, Country51), Solution),
+  ((member(Month51-Reactor51-tp-Country51, S),
   Month51 \= feb, (Reactor51 = comati; Country51 = ecuador)),
-  (member(reactor(feb, Reactor52, Principle52, Country52), Solution),
+  (member(feb-Reactor52-Principle52-Country52, S),
   Principle52 \= tp, (Reactor52 = comati; Country52 = ecuador))),
 
 % условие 6
-  (member(reactor(_, tamura, _, zambia), Solution)),
+  (member(_-tamura-_-zambia, S)),
 
 % условие 7
-  (member(reactor(Month71, Reactor71, fusor, _), Solution),
+  (member(Month71-Reactor71-fusor-_, S),
   Month71 \= apr, Reactor71 \= adtina,
-  member(reactor(apr, Reactor72, Principle72, _), Solution),
+  member(apr-Reactor72-Principle72-_, S),
   Principle72 \= fusor, Reactor72 \= adtina),
 
 % условие 8
-  (member(reactor(Month8, Reactor8, _, qatar), Solution),
+  (member(Month8-Reactor8-_-qatar, S),
   (Reactor8 = dynotis; Month8 = mar)).
